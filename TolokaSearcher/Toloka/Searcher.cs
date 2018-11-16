@@ -8,7 +8,7 @@ namespace TolokaSearcher.Toloka
     {
         private static string apiUrl = "https://toloka.to/api.php";
 
-        public List<TolokaResult> search (string query)
+        public static List<TolokaResult> search (string query)
         {
             return apiUrl
                 .SetQueryParam("search", query)
