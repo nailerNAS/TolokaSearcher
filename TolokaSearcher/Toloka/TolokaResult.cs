@@ -1,7 +1,4 @@
-﻿using Newtonsoft.Json;
-using System.Collections.Generic;
-
-namespace TolokaSearcher.Toloka
+﻿namespace TolokaSearcher.Toloka
 {
     public class TolokaResult
     {
@@ -15,11 +12,5 @@ namespace TolokaSearcher.Toloka
         public string seeders { get; set; }
         public string leechers { get; set; }
         public string complete { get; set; }
-
-        public static TolokaResult fromJson(Dictionary<string, string> json)
-        {
-            string stringJson = JsonConvert.SerializeObject(json);
-            return (TolokaResult)JsonConvert.DeserializeObject(stringJson);
-        }
     }
 }
