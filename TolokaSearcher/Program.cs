@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TolokaSearcher
 {
@@ -10,6 +6,8 @@ namespace TolokaSearcher
     {
         static void Main(string[] args)
         {
+            Telegram.Bot bot = new Telegram.Bot();
+            Console.ReadLine();
         }
     }
 }

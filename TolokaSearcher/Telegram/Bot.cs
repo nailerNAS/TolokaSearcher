@@ -26,25 +26,35 @@ namespace TolokaSearcher.Telegram
             if (e.InlineQuery.Query != string.Empty)
             {
                 List<TolokaResult> tolokaResults = Searcher.search(e.InlineQuery.Query);
+                List<InlineQueryResultBase> inlineResults = new List<InlineQueryResultBase>();
 
-                foreach (var tr in tolokaResults)
+                if (tolokaResults.Count > 0)
                 {
-                    var inputContent = new InputTextMessageContent(tr.ToString());
-                    var article = new InlineQueryResultArticle(tolokaResults.IndexOf(tr).ToString(), tr.title, inputContent);
+                    foreach (var result in tolokaResults)
+                    {
+                        var inputContent = new InputTextMessageContent(result.ToString());
+                        var article = new InlineQueryResultArticle(tolokaResults.IndexOf(result).ToString(), result.title, inputContent)
+                        {
+                            Description = $"{result.seeders}/{result.leechers}/{result.complete} ({result.size})"
+                        };
 
-                    inlineQueryResults.Add(article);
+                        inlineResults.Add(article);
+                    }
                 }
+
+                else
+                {
+                    var inputContent = new InputTextMessageContent($"No results found for {e.InlineQuery.Query}.");
+                    var article = new InlineQueryResultArticle("1", "Not found", inputContent)
+                    {
+                        Description = $"Nothing found by {e.InlineQuery.Query}"
+                    };
+
+                    inlineResults.Add(article);
+                }
+
+                bot.AnswerInlineQueryAsync(e.InlineQuery.Id, inlineResults);
             }
-
-            else
-            {
-                var inputContent = new InputTextMessageContent("Enter a query to search Toloka.to");
-                var article = new InlineQueryResultArticle("1", "Search", inputContent);
-
-                inlineQueryResults.Add(article);
-            }
-
-            bot.AnswerInlineQueryAsync(e.InlineQuery.Id, inlineQueryResults);
         }
     }
 }
