@@ -15,6 +15,8 @@ namespace TolokaSearcher.Telegram
             bot = new TelegramBotClient(Config.Token);
 
             bot.OnInlineQuery += Bot_OnInlineQuery;
+
+            bot.StartReceiving();
         }
 
         private void Bot_OnInlineQuery(object sender, InlineQueryEventArgs e)
