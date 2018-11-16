@@ -12,5 +12,20 @@
         public string seeders { get; set; }
         public string leechers { get; set; }
         public string complete { get; set; }
+
+        public override string ToString()
+        {
+            return
+                $"ID: {id}" +
+                $"\nLink: {link}" +
+                $"\nTitle: {title}" +
+                $"\nForum name: {title}" +
+                $"\nForum parent: {forum_parent}" +
+                $"\nComments: {comments}" +
+                $"\nSize: {size}" +
+                $"\nSeeders: {seeders}" +
+                $"\nLeechers: {leechers}" +
+                $"\nComplete: {complete}";
+        }
     }
 }
